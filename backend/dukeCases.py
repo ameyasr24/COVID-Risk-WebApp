@@ -20,3 +20,5 @@ for table in tables:
          print("Positive tests: " + str(numPositive))
          print("Infection rate: {:0.4f}%".format(100*(numPositive/numTested)))
     tableNum += 1
+
+    
