@@ -22,6 +22,41 @@ inhalation_mask_efficiency = [0.3,0.5]
 background_infection_rate_faculty = [0.0070,0.0140]
 background_infection_rate_student = [0.0070,0.0140]
 
+"""
+code here:
+
+"""
+trials = 100000
+for(x in range trials){
+    randomizeAll()
+    
+
+}
+
+def randomizeAll(){
+    randomize(breathing_rate_faculty)
+    randomize(breathing_rate_student)
+    randomize(ventilation_w_outside_air)
+    randomize(decay_rate_of_virus)
+    randomize(deposition_to_surface)
+    randomize(additional_control_measures)
+    randomize(exhalation_mask_efficiency)
+    randomize(inhalation_mask_efficiency)
+    randomize(background_infection_rate_faculty)
+    randomize(background_infection_rate_student)
+    
+    randomizeFromNormal(quanta_emission_rate_faculty)
+    randomizeFromNormal(quanta_emission_rate_student)
+    
+}
+
+def randomize(bounds):
+    bounds[2] = np.random() * bounds[1]-bounds[0]
+
+def randomizeFromNormal(normdist):
+    normdist[2] = 10**np.random.normal(normdist[0],normdist[1])
+    ##also does the UNDO LOG
+
 # Q_f: quanta emission rate by infected faculty 
 # m_out: mask exhalation efficiency 
 # k: first order loss coefficients for ventilation , decay, deposition, and other control measures
