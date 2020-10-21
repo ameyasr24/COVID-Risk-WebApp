@@ -21,6 +21,9 @@ exhalation_mask_efficiency = [0.4,0.6]
 inhalation_mask_efficiency = [0.3,0.5]
 background_infection_rate_faculty = [0.0070,0.0140]
 background_infection_rate_student = [0.0070,0.0140]
+# get numbers from getCountyCases.py stufffffff
+percent_faculty_infectious = 0
+percent_student_infectious = 0
 
 """
 code here:
@@ -29,7 +32,14 @@ code here:
 trials = 100000
 for(x in range trials){
     randomizeAll()
-    
+    cf = calc_Cf(quanta_emission_rate_faculty, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
+    cs = calc_Cs(quanta_emission_rate_student, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
+    Nfs = calc_Nfs(cf, background_infection_rate_student, inhalation_mask_efficiency, duration)
+    Nsf = calc_Nsf(cs, background_infection_rate_student, inhalation_mask_efficiency, duration)
+    Nss = calc_Nss(cs, background_infection_rate_student, inhalation_mask_efficiency, duration)
+    Pfs = calc_pfs(percent_faculty_infectious, Nfs)
+    Psf = calc_psf(percent_student_infectious, Nsf)
+    Pss = calc_pss(percent_student_infectious, Nss)
 
 }
 
