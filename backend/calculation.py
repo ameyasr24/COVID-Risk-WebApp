@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import math
+
 #cool code ^tm 
 e = math.e
 
@@ -30,6 +31,8 @@ code here:
 
 """
 trials = 100000
+fac_runs = []
+student_runs = []
 for(x in range trials){
     randomizeAll()
     cf = calc_Cf(quanta_emission_rate_faculty, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
@@ -40,7 +43,12 @@ for(x in range trials){
     Pfs = calc_pfs(percent_faculty_infectious, Nfs)
     Psf = calc_psf(percent_student_infectious, Nsf)
     Pss = calc_pss(percent_student_infectious, Nss)
-
+    P1f = calc_p1f(Psf, num_students)
+    P1s = calc_p1s(Pss, num_students, Pfs, num_faculty)
+    Pf = calc_pf(P1f, num_class_periods)
+    Ps = calc_ps(P1s, num_class_periods)
+    fac_runs[x] = Pf
+    student_runs[x] = Ps
 }
 
 def randomizeAll(){
@@ -129,7 +137,7 @@ def calc_pf(p1_f, n_c):
     return pf
     
 # Probability of student infection for semester:
-def calc_Ps(p1_s, n_c):
+def calc_ps(p1_s, n_c):
     return 1
 ###
 
