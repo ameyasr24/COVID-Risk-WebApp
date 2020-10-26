@@ -3,7 +3,6 @@ import pandas as pd
 import math
 import getCountyCases from getCountyCases
 
-#cool code ^tm 
 e = math.e
 
 volume = 9000
@@ -29,11 +28,7 @@ state = ""
 percent_faculty_infectious = getCountyCases(county, state)
 percent_student_infectious = getCountyCases(county, state)
 
-
-"""
-code here:
-
-"""
+############################
 trials = 100000
 fac_runs = []
 student_runs = []
@@ -69,7 +64,6 @@ def randomizeAll(){
     
     randomizeFromNormal(quanta_emission_rate_faculty)
     randomizeFromNormal(quanta_emission_rate_student)
-    
 }
 
 def randomize(bounds):
