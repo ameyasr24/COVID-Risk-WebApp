@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import math
+import getCountyCases from getCountyCases
 
 #cool code ^tm 
 e = math.e
@@ -22,9 +23,12 @@ exhalation_mask_efficiency = [0.4,0.6]
 inhalation_mask_efficiency = [0.3,0.5]
 background_infection_rate_faculty = [0.0070,0.0140]
 background_infection_rate_student = [0.0070,0.0140]
-# get numbers from getCountyCases.py stufffffff
-percent_faculty_infectious = 0
-percent_student_infectious = 0
+
+county = ""
+state = ""
+percent_faculty_infectious = getCountyCases(county, state)
+percent_student_infectious = getCountyCases(county, state)
+
 
 """
 code here:
