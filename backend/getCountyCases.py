@@ -44,7 +44,7 @@ def getCountyCases(county, state):
     #print(casesYesterday, casesOneWeek, newCasesOneWeek)
 
     county = county + " County"
-
+    population = 1
     with open('US_Counties_by_Population.csv') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             #line_count = 0
@@ -58,6 +58,6 @@ def getCountyCases(county, state):
     infRateHigh = infRateLow * 2
 
     #print(infRateLow, infRateHigh)
-    return [infRateLow, infRateHigh]
+    return [infRateLow, infRateHigh, 0]
 
 print(getCountyCases("Wake", "North Carolina"))
