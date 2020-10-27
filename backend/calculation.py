@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import math
-import getCountyCases from getCountyCases
+import getCountyCases
 
 e = math.e
 
@@ -32,16 +32,16 @@ percent_student_infectious = getCountyCases(county, state)
 trials = 100000
 fac_runs = []
 student_runs = []
-for(x in range(trials)):
+for x in range(trials):
     randomizeAll()
-    cf = calc_Cf(quanta_emission_rate_faculty, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
-    cs = calc_Cs(quanta_emission_rate_student, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
-    Nfs = calc_Nfs(cf, background_infection_rate_student, inhalation_mask_efficiency, duration)
-    Nsf = calc_Nsf(cs, background_infection_rate_student, inhalation_mask_efficiency, duration)
-    Nss = calc_Nss(cs, background_infection_rate_student, inhalation_mask_efficiency, duration)
-    Pfs = calc_pfs(percent_faculty_infectious, Nfs)
-    Psf = calc_psf(percent_student_infectious, Nsf)
-    Pss = calc_pss(percent_student_infectious, Nss)
+    cf = calc_Cf(quanta_emission_rate_faculty[2], exhalation_mask_efficiency[2], (ventilation_w_outside_air[2]+decay_rate_of_virus[2]+deposition_to_surface[2]+additional_control_measures[2]), duration)
+    cs = calc_Cs(quanta_emission_rate_student[2], exhalation_mask_efficiency[2], (ventilation_w_outside_air[2]+decay_rate_of_virus[2]+deposition_to_surface[2]+additional_control_measures[2]), duration)
+    Nfs = calc_Nfs(cf, background_infection_rate_student[2], inhalation_mask_efficiency[2], duration)
+    Nsf = calc_Nsf(cs, background_infection_rate_student[2], inhalation_mask_efficiency[2], duration)
+    Nss = calc_Nss(cs, background_infection_rate_student[2], inhalation_mask_efficiency[2], duration)
+    Pfs = calc_pfs(percent_faculty_infectious[2], Nfs)
+    Psf = calc_psf(percent_student_infectious[2], Nsf)
+    Pss = calc_pss(percent_student_infectious[2], Nss)
     P1f = calc_p1f(Psf, num_students)
     P1s = calc_p1s(Pss, num_students, Pfs, num_faculty)
     Pf = calc_pf(P1f, num_class_periods)
