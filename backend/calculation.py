@@ -32,7 +32,7 @@ percent_student_infectious = getCountyCases(county, state)
 trials = 100000
 fac_runs = []
 student_runs = []
-for(x in range trials):
+for(x in range(trials)):
     randomizeAll()
     cf = calc_Cf(quanta_emission_rate_faculty, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
     cs = calc_Cs(quanta_emission_rate_student, exhalation_mask_efficiency, (ventilation_w_outside_air+decay_rate_of_virus+deposition_to_surface+additional_control_measures), duration)
@@ -49,6 +49,7 @@ for(x in range trials):
     fac_runs[x] = Pf
     student_runs[x] = Ps
 
+
 def randomizeAll():
     randomize(breathing_rate_faculty)
     randomize(breathing_rate_student)
@@ -63,7 +64,6 @@ def randomizeAll():
     
     randomizeFromNormal(quanta_emission_rate_faculty)
     randomizeFromNormal(quanta_emission_rate_student)
-
 
 def randomize(bounds):
     bounds[2] = np.random() * bounds[1]-bounds[0]
