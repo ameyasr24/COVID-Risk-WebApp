@@ -185,4 +185,3 @@ facultyResults = {'fac_quants_05': fac_quants_05,
 'fac_quants_50': fac_quants_50, 
 'fac_quants_75': fac_quants_75, 
 'fac_quants_95': fac_quants_95}
-
