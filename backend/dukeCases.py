@@ -1,6 +1,6 @@
-import requests
 from bs4 import BeautifulSoup
 import re
+import requests
 
 def getDukeStudentCases():
      # Scrape Duke's COVID Testing Tracker for data
@@ -14,6 +14,23 @@ def getDukeStudentCases():
      infRate = 0
      tableNum = 0
      for table in tables:
+          if tableNum == 0: #faculty table 
+               td_list = table.find_all("td")
+               numTested = int(re.sub("[^0-9]", "", td_list[1].text.strip()))
+               numPositive = int(re.sub("[^0-9]", "", td_list[2].text.strip()))
+               print("Total tests Faculty: " + str(numTested))
+               print("Positive tests Faculty: " + str(numPositive))
+               print("Infection rate Faculty: {:0.4f}%".format(100*(numPositive/numTested)))
+               infRate = numPositive/numTested
+          if tableNum == 1: #student table 
+               td_list = table.find_all("td")
+               numTested = int(re.sub("[^0-9]", "", td_list[1].text.strip()))
+               numPositive = int(re.sub("[^0-9]", "", td_list[2].text.strip()))
+               print("Total tests Student: " + str(numTested))
+               print("Positive tests Student: " + str(numPositive))
+               print("Infection rate Student: {:0.4f}%".format(100*(numPositive/numTested)))
+               infRate = numPositive/numTested
+
           if tableNum == 2: # the table with combined totals
                td_list = table.find_all("td")
                numTested = int(re.sub("[^0-9]", "", td_list[1].text.strip()))
@@ -25,3 +42,7 @@ def getDukeStudentCases():
           tableNum += 1
 
      return [infRate, infRate*2]
+
+
+
+getDukeStudentCases()
