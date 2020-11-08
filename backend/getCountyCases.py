@@ -60,4 +60,4 @@ def getCountyCases(county, state):
     #print(infRateLow, infRateHigh)
     return [infRateLow, infRateHigh, 0]
 
-print(getCountyCases("Wake", "North Carolina"))
+print(getCountyCases("Durham", "North Carolina"))

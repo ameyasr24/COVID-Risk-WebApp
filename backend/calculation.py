@@ -6,7 +6,9 @@ import statistics
 
 e = math.e
 
-volume = 9000*(0.305**3)
+floor_area = 900
+height = 10
+volume = floor_area*height*(0.305**3)
 num_faculty = 1
 num_students = 10
 duration = 75/60
@@ -155,8 +157,8 @@ for x in range(trials):
     fac_runs[x] = Pf
     student_runs[x] = Ps
 
-student_mean = statistics.mean(student_runs)
-fac_mean = statistics.mean(fac_runs)
+student_mean = round(statistics.mean(student_runs)*100,2)
+fac_mean = round(statistics.mean(fac_runs)*100,2)
 
 student_quants_05 = np.quantile(student_runs, 0.05)
 student_quants_25 = np.quantile(student_runs, 0.25)
@@ -164,24 +166,26 @@ student_quants_50 = np.quantile(student_runs, 0.50)
 student_quants_75 = np.quantile(student_runs, 0.75)
 student_quants_95 = np.quantile(student_runs, 0.95)
 
-fac_quants_05 = np.quantile(student_runs, 0.05)
-fac_quants_25 = np.quantile(student_runs, 0.25)
-fac_quants_50 = np.quantile(student_runs, 0.50)
-fac_quants_75 = np.quantile(student_runs, 0.75)
-fac_quants_95 = np.quantile(student_runs, 0.95)
+fac_quants_05 = np.quantile(fac_runs, 0.05)
+fac_quants_25 = np.quantile(fac_runs, 0.25)
+fac_quants_50 = np.quantile(fac_runs, 0.50)
+fac_quants_75 = np.quantile(fac_runs, 0.75)
+fac_quants_95 = np.quantile(fac_runs, 0.95)
 
-studentResults = {'student_quants_05': student_quants_05*100, 
-'student_quants_25': student_quants_25*100, 
-'student_quants_50': student_quants_50*100, 
-'student_quants_75': student_quants_75*100, 
-'student_quants_95': student_quants_95*100}
+studentResults = {'student_quants_05': round(student_quants_05*100,2), 
+'student_quants_25': round(student_quants_25*100,2), 
+'student_quants_50': round(student_quants_50*100,2), 
+'student_quants_75': round(student_quants_75*100,2), 
+'student_quants_95': round(student_quants_95*100,2)}
 
 
-facultyResults = {'fac_quants_05': fac_quants_05, 
-'fac_quants_25': fac_quants_25, 
-'fac_quants_50': fac_quants_50, 
-'fac_quants_75': fac_quants_75, 
-'fac_quants_95': fac_quants_95}
+facultyResults = {'fac_quants_05': round(fac_quants_05*100,2), 
+'fac_quants_25': round(fac_quants_25*100,2), 
+'fac_quants_50': round(fac_quants_50*100,2), 
+'fac_quants_75': round(fac_quants_75*100,2), 
+'fac_quants_95': round(fac_quants_95*100,2)}
 
 print(studentResults)
+print(student_mean)
 print(facultyResults)
+print(fac_mean)
