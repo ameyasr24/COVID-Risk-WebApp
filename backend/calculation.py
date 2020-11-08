@@ -6,13 +6,11 @@ import statistics
 
 e = math.e
 
-volume = 9000
+volume = 9000*(0.305**3)
 num_faculty = 1
 num_students = 10
-duration = 75
+duration = 75/60
 num_class_periods = 26
-breathing_rate_faculty = [0.027,0.029,1]
-breathing_rate_student = [0.012,0.012,1]
 ventilation_w_outside_air = [1,4, 1]
 decay_rate_of_virus = [0,1.0,1]
 deposition_to_surface = [0.3,1.5,1]
@@ -24,7 +22,8 @@ inhalation_mask_efficiency = [0.3,0.5,1]
 inhalation_rate_faculty = [0.005,0.01,1]
 inhalation_rate_student = [0.005,0.007,1]
 
-county = "Wake"
+
+county = "Durham"
 state = "North Carolina"
 percent_faculty_infectious = getCountyCases(county, state)
 percent_student_infectious = getCountyCases(county, state)
@@ -32,8 +31,6 @@ percent_student_infectious = getCountyCases(county, state)
 ############################
 
 def randomizeAll():
-    randomize(breathing_rate_faculty)
-    randomize(breathing_rate_student)
     randomize(ventilation_w_outside_air)
     randomize(decay_rate_of_virus)
     randomize(deposition_to_surface)
@@ -50,7 +47,7 @@ def randomizeAll():
     
 
 def randomize(bounds):
-    bounds[2] = np.random.random_sample() * (bounds[1]-bounds[0])
+    bounds[2] = bounds[0] + np.random.random_sample() * (bounds[1]-bounds[0])
 
 def randomizeFromNormal(normdist):
     normdist[2] = 10**np.random.normal(normdist[0],normdist[1])
@@ -124,21 +121,21 @@ def calc_ps(p1_s, n_c):
     return ps
 
 
-trials = 1
+trials = 100000
 fac_runs = [0] * trials
 student_runs = [0] * trials
 for x in range(trials):
     randomizeAll()
-
+    
     cf = calc_Cf(quanta_emission_rate_faculty[2], exhalation_mask_efficiency[2], (ventilation_w_outside_air[2]+decay_rate_of_virus[2]+deposition_to_surface[2]+additional_control_measures[2]), volume, duration)
     #print("cf: ", cf)
     cs = calc_Cs(quanta_emission_rate_student[2], exhalation_mask_efficiency[2], (ventilation_w_outside_air[2]+decay_rate_of_virus[2]+deposition_to_surface[2]+additional_control_measures[2]), volume, duration)
     #print("cs: ", cs)
-    Nfs = calc_Nfs(cf, inhalation_rate_student[2], inhalation_mask_efficiency[2], duration)
+    Nfs = calc_Nfs(cf, inhalation_rate_student[2]*60, inhalation_mask_efficiency[2], duration)
     #print("Nfs: ", Nfs)
-    Nsf = calc_Nsf(cs, inhalation_rate_faculty[2], inhalation_mask_efficiency[2], duration)
+    Nsf = calc_Nsf(cs, inhalation_rate_faculty[2]*60, inhalation_mask_efficiency[2], duration)
     #print("Nsf: ", Nsf)
-    Nss = calc_Nss(cs, inhalation_rate_student[2], inhalation_mask_efficiency[2], duration)
+    Nss = calc_Nss(cs, inhalation_rate_student[2]*60, inhalation_mask_efficiency[2], duration)
     #print("Nss: ", Nss)
     Pfs = calc_pfs(percent_faculty_infectious[2], Nfs)
     # print("f_f: ", percent_faculty_infectious)
@@ -173,11 +170,11 @@ fac_quants_50 = np.quantile(student_runs, 0.50)
 fac_quants_75 = np.quantile(student_runs, 0.75)
 fac_quants_95 = np.quantile(student_runs, 0.95)
 
-studentResults = {'student_quants_05': student_quants_05, 
-'student_quants_25': student_quants_25, 
-'student_quants_50': student_quants_50, 
-'student_quants_75': student_quants_75, 
-'student_quants_95': student_quants_95}
+studentResults = {'student_quants_05': student_quants_05*100, 
+'student_quants_25': student_quants_25*100, 
+'student_quants_50': student_quants_50*100, 
+'student_quants_75': student_quants_75*100, 
+'student_quants_95': student_quants_95*100}
 
 
 facultyResults = {'fac_quants_05': fac_quants_05, 
@@ -185,3 +182,6 @@ facultyResults = {'fac_quants_05': fac_quants_05,
 'fac_quants_50': fac_quants_50, 
 'fac_quants_75': fac_quants_75, 
 'fac_quants_95': fac_quants_95}
+
+print(studentResults)
+print(facultyResults)
