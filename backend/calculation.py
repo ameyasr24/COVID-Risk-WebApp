@@ -123,7 +123,7 @@ def calc_ps(p1_s, n_c):
     return ps
 
 
-trials = 100000
+trials = 10000
 fac_runs = [0] * trials
 student_runs = [0] * trials
 for x in range(trials):
