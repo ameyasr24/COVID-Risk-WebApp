@@ -3,6 +3,9 @@ import pandas as pd
 import math
 from getCountyCases import getCountyCases
 import statistics
+import time
+
+# tStart = time.perf_counter()
 
 e = math.e
 
@@ -124,8 +127,8 @@ def calc_ps(p1_s, n_c):
 
 
 trials = 10000
-fac_runs = [0] * trials
-student_runs = [0] * trials
+fac_runs = np.zeros(trials)
+student_runs = np.zeros(trials)
 for x in range(trials):
     randomizeAll()
     
@@ -189,3 +192,6 @@ print(studentResults)
 print(student_mean)
 print(facultyResults)
 print(fac_mean)
+
+# tEnd = time.perf_counter()
+# print(tEnd - tStart)
