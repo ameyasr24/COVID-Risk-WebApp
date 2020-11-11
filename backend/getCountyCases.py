@@ -53,7 +53,9 @@ def getCountyCases(county, state):
                     if row[2] == state:
                         population = float(row[3])
     
-
+    if(population == 1):
+        return [0.7, 1.4, 0]
+    
     infRateLow = newCasesOneWeek/population
     infRateHigh = infRateLow * 2
 
